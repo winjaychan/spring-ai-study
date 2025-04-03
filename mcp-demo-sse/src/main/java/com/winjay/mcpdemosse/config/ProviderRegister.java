@@ -1,5 +1,6 @@
 package com.winjay.mcpdemosse.config;
 
+import com.winjay.mcpdemosse.service.BalanceService;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.ai.tool.method.MethodToolCallbackProvider;
 import org.springframework.context.annotation.Bean;
@@ -16,9 +17,9 @@ import com.winjay.mcpdemosse.service.WeatherService;
 @Configuration
 public class ProviderRegister {
     @Bean
-    public ToolCallbackProvider weatherTools(WeatherService weatherService) {
+    public ToolCallbackProvider weatherTools(WeatherService weatherService, BalanceService balanceService) {
         return MethodToolCallbackProvider.builder()
-                .toolObjects(weatherService)
+                .toolObjects(weatherService, balanceService)
                 .build();
     }
 }
